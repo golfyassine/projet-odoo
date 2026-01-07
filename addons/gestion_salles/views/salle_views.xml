@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_salle_form" model="ir.ui.view">
+        <field name="name">gestion.salle.form</field>
+        <field name="model">gestion.salle</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" placeholder="Ex: Salle de Conférence A"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="capacite"/>
+                        </group>
+                        <group>
+                            <field name="a_projecteur"/>
+                            <field name="a_climatisation"/>
+                        </group>
+                    </group>
+                    <field name="description" placeholder="Notes sur la salle..."/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_gestion_salle" model="ir.actions.act_window">
+        <field name="name">Salles</field>
+        <field name="res_model">gestion.salle</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_gestion_root" name="Réservation Salles" sequence="10"/>
+    <menuitem id="menu_salles" parent="menu_gestion_root" action="action_gestion_salle" sequence="10"/>
+</odoo>

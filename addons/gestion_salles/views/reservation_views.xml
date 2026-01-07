@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_reservation_calendar" model="ir.ui.view">
+        <field name="name">gestion.reservation.calendar</field>
+        <field name="model">gestion.reservation</field>
+        <field name="arch" type="xml">
+            <calendar string="Réservations" date_start="date_debut" date_stop="date_fin" color="salle_id">
+                <field name="name"/>
+                <field name="salle_id"/>
+            </calendar>
+        </field>
+    </record>
+
+    <record id="view_reservation_tree" model="ir.ui.view">
+        <field name="name">gestion.reservation.tree</field>
+        <field name="model">gestion.reservation</field>
+        <field name="arch" type="xml">
+            <tree decoration-info="statut == 'brouillon'" decoration-success="statut == 'confirme'">
+                <field name="name"/>
+                <field name="salle_id"/>
+                <field name="date_debut"/>
+                <field name="date_fin"/>
+                <field name="statut" widget="badge"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_reservation_form" model="ir.ui.view">
+        <field name="name">gestion.reservation.form</field>
+        <field name="model">gestion.reservation</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="statut" widget="statusbar" options="{'clickable': '1'}"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="salle_id"/>
+                    </group>
+                    <group>
+                        <field name="date_debut"/>
+                        <field name="date_fin"/>
+                        <field name="responsable_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_gestion_reservation" model="ir.actions.act_window">
+        <field name="name">Réservations</field>
+        <field name="res_model">gestion.reservation</field>
+        <field name="view_mode">calendar,tree,form</field>
+    </record>
+
+    <menuitem id="menu_reservations" parent="menu_gestion_root" action="action_gestion_reservation" sequence="20"/>
+</odoo>
